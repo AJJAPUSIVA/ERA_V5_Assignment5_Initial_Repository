@@ -1,63 +1,81 @@
-schema_version: v5-assignment5-proxy-plan-1
+schema_version: v5-assignment5-proxy-plan-2
+status: planned_not_executed
 budget_ceiling_sek: 1000
-model_candidate: Qwen/Qwen2.5-1.5B
-method: continued_pretraining
-sequence_length: 1024
-precision: bf16
-gradient_checkpointing: true
-learning_rate: 1.0e-05
-weight_decay: 0.1
-warmup_ratio: 0.05
-scheduler: cosine
-seed: 42
-token_budget_rule:
+scope_statement: low_budget_proxy_tests_only_verified_general_hindi_and_hinglish_allocation_not_full_v5_capability_mix
+calibration:
+  required_before_paid_runs: true
+  steps: 200
+  freeze_equal_model_token_budget_after_calibration: true
   maximum_tokens_per_run: 8000000
   maximum_gpu_hours_per_run: 5
-  final_budget_selected_after_calibration: true
-  equal_tokens_for_all_conditions: true
-runs:
-  M0:
-    general: 72
-    hindi: 14
-    hinglish: 14
-  M1:
-    general: 60
-    hindi: 20
-    hinglish: 20
-  M2:
-    cumulative:
+one_b_scale_screening:
+  model_candidate: Qwen/Qwen2.5-1.5B
+  method: continued_pretraining_from_identical_base_checkpoint
+  sequence_length: 1024
+  precision: bf16
+  gradient_checkpointing: true
+  learning_rate: 1.0e-05
+  weight_decay: 0.1
+  warmup_ratio: 0.05
+  scheduler: cosine
+  seed: 42
+  runs:
+    M0:
+      general: 72
+      hindi: 14
+      hinglish: 14
+    M1:
       general: 60
       hindi: 20
       hinglish: 20
-    optional: true
-    stages:
-    - fraction: 0.6
-      general: 70
-      hindi: 15
-      hinglish: 15
-    - fraction: 0.3
-      general: 50
-      hindi: 25
-      hinglish: 25
-    - fraction: 0.1
-      general: 30
-      hindi: 35
-      hinglish: 35
-fixed_validation_lanes:
-- general
-- hindi
-- hinglish_native
-- hinglish_romanized
+    M2_optional:
+      cumulative:
+        general: 60
+        hindi: 20
+        hinglish: 20
+      stages:
+      - fraction: 0.6
+        general: 70
+        hindi: 15
+        hinglish: 15
+      - fraction: 0.3
+        general: 50
+        hindi: 25
+        hinglish: 25
+      - fraction: 0.1
+        general: 30
+        hindi: 35
+        hinglish: 35
+  fixed_validation_lanes:
+  - general
+  - hindi
+  - hinglish_native
+  - hinglish_romanized
+  mandatory_conditions:
+  - M0
+  - M1
+  optional_condition: M2_optional_only_after_M0_M1_and_evaluation_complete
 acceptance:
   hindi_loss_relative_improvement_min: 0.02
   combined_hinglish_loss_relative_improvement_min: 0.02
   general_loss_relative_regression_max: 0.01
   any_lane_relative_regression_max: 0.02
   weighted_overall_loss_must_not_worsen: true
-three_b_confirmation:
+  one_seed_interpretation: directional_evidence_only
+three_b_scale_confirmation:
+  status: specified_not_executed_in_current_budget
   model_candidate: Qwen/Qwen2.5-3B
   conditions:
-  - baseline
+  - baseline_M0
   - best_1_5b_treatment
   minimum_seeds_per_condition: 2
-  executed_in_current_budget: false
+  same_tokenizer: true
+  same_model_token_budget_between_conditions: true
+  same_optimizer_schedule_and_evaluation_files: true
+  confirmation_rule:
+  - direction_of_indic_gain_repeats_across_both_seeds
+  - general_regression_guardrail_is_not_breached
+  - weighted_overall_loss_does_not_worsen
+  refutation_rule:
+  - gain_disappears_or_reverses_at_3b
+  - general_or_any_protected_lane_exceeds_regression_limit

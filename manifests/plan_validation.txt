@@ -1,6 +1,11 @@
 PLAN VALIDATION: PASS
-Main curriculum: 92.0%
+Main contribution: 92.0%
 Anneal reserve: 8.0%
 Final exposure: 100.0%
 Final Indic allocation: 26.0%
+Stage-weighted headline mixture: exact
+Separate main and anneal presets: valid
+OPUS-bypass floors: Verified Indic, Reasoning, Agentic
+Reasoning lifecycle and Agentic mask: valid
+Inventory rows checked: 12
 Supply rows: 11

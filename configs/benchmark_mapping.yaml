@@ -1,69 +1,224 @@
-schema_version: v5-assignment5-benchmark-mapping-1
-mappings:
-  general_language:
-    current_data:
-    - verified_general_5m_pilot
-    benchmarks:
-    - MMLU-Pro
-    - ARC-Challenge
-    - WinoGrande
-    - validation_loss
-  indic_verified:
-    current_data:
-    - verified_hindi_1m
-    - authentic_hinglish_pending_review
-    benchmarks:
-    - MILU Hindi
-    - IndicQA Hindi
-    - IndicIFEval
-  indic_unverified:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-  indic_translated:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-    benchmarks:
-    - FLORES_or_IN22_style_translation
-  indic_synthetic:
-    current_data:
-    - IndicCMix_derived_hinglish
-    benchmarks:
-    - Indic_composite
-    - human_quality_audit
-  reasoning:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-    benchmarks:
-    - GSM8K
-    - BBH
-    - GPQA
-    - MMLU-Pro
-  code:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-    benchmarks:
-    - HumanEval_or_MBPP_style_execution
-  mathematics_science:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-    benchmarks:
-    - GSM8K
-    - MATH_style_quantitative_evaluation
-  agentic:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-    benchmarks:
-    - tool_success
-    - task_completion
-    - invalid_action_rate
-  long_context:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-    benchmarks:
-    - RULER_or_LongBench_style_evaluation
-  non_indic_multilingual:
-    current_data: []
-    inventory_status: pending_exact_course_inventory
-    benchmarks:
-    - cross_lingual_validation
-    - multilingual_composite
+schema_version: v5-assignment5-benchmark-mapping-2
+required_inventory_columns:
+- capability
+- dataset
+- training_stage
+- samples
+- unique_tokens
+- license
+- provenance_tier
+- cleaning_status
+- required_tokens
+- repeat_factor
+- generation_requirement
+- loss_shape
+- benchmarks
+inventory_rows:
+- capability: general_language
+  dataset: verified_general_5m_pilot
+  training_stage:
+  - pretraining
+  - anneal_high_quality_subset
+  samples: 5052
+  unique_tokens: 5175419
+  license: mixed_sources_recorded_in_phase2_manifest
+  provenance_tier: project_verified
+  cleaning_status: verified
+  required_tokens: computed_from_final_budget_after_cohort_budget_is_fixed
+  repeat_factor: see_supply_accounting_yaml
+  generation_requirement: none_for_pilot_more_unique_supply_required_for_scale
+  loss_shape: next_token_loss_on_training_text
+  benchmarks:
+  - MMLU-Pro
+  - ARC-Challenge
+  - WinoGrande
+  - validation_loss
+- capability: indic_verified
+  dataset: ai4bharat_sangraha_verified_hindi_pilot
+  training_stage:
+  - pretraining
+  - anneal_verified_subset
+  samples: 2421
+  unique_tokens: 1000032
+  license: CC-BY-4.0
+  provenance_tier: verified
+  cleaning_status: verified_after_hash_repair
+  required_tokens: computed_from_12_5_percent_final_total_share
+  repeat_factor: see_supply_accounting_yaml
+  generation_requirement: more_native_verified_supply_required
+  loss_shape: next_token_loss_on_training_text
+  benchmarks:
+  - MILU Hindi
+  - IndicQA Hindi
+  - IndicIFEval
+- capability: indic_verified_pending_review
+  dataset: COMI-LINGUA_and_PHINC_authentic_hinglish_subset
+  training_stage:
+  - pretraining
+  - anneal_after_bilingual_review
+  samples: 24759
+  unique_tokens: 443916
+  license: CC-BY-4.0
+  provenance_tier: authentic_pending_human_review
+  cleaning_status: automated_gate_passed_bilingual_review_pending
+  required_tokens: part_of_verified_indic_after_review
+  repeat_factor: not_counted_as_verified_until_review
+  generation_requirement: additional_authentic_romanized_hinglish_required
+  loss_shape: next_token_loss_on_training_text
+  benchmarks:
+  - Hinglish_validation_loss
+  - Indic_code_switch_composite
+- capability: indic_synthetic
+  dataset: IndicCMix_derived_hinglish_subset
+  training_stage:
+  - pretraining_limited
+  - not_eligible_for_verified_floor
+  samples: 26874
+  unique_tokens: 556100
+  license: MIT
+  provenance_tier: synthetic
+  cleaning_status: automated_gate_passed
+  required_tokens: capped_at_3_5_percent_of_total_budget
+  repeat_factor: see_supply_accounting_yaml
+  generation_requirement: generator_provenance_and_human_audit_required
+  loss_shape: next_token_loss_on_training_text
+  benchmarks:
+  - Indic_composite
+  - human_quality_audit
+starved_lane_templates:
+- capability: indic_unverified
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - pretraining
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: possible_if_supply_gap_remains_after_cleaning
+  loss_shape: next_token_loss
+  benchmarks:
+  - Indic_language_modelling
+  - Indic_downstream_composite
+- capability: indic_translated
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - pretraining
+  - anneal_only_if_high_quality
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: translation_needed_if_native_supply_is_insufficient
+  loss_shape: next_token_loss
+  benchmarks:
+  - FLORES_or_IN22_style_translation
+- capability: reasoning
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - pretraining_support
+  - reasoning_sft
+  - reasoning_rl
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: worked_traces_or_verifiable_problems_may_need_generation
+  loss_shape: stage_dependent_supervised_trace_or_reward
+  benchmarks:
+  - GSM8K
+  - BBH
+  - GPQA
+  - MMLU-Pro
+- capability: code
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - pretraining
+  - anneal
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: synthetic_tests_or_repairs_may_be_generated
+  loss_shape: loss_on_generated_code_patch_or_answer
+  benchmarks:
+  - HumanEval_or_MBPP_style_execution
+- capability: mathematics_science
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - pretraining
+  - reasoning_sft_rl
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: verifiable_problems_may_be_generated
+  loss_shape: stage_dependent
+  benchmarks:
+  - GSM8K
+  - MATH_style_quantitative_evaluation
+- capability: agentic
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - pretraining_support
+  - anneal_or_sft
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: high_quality_trajectories_largely_need_to_be_built
+  loss_shape: mask_user_and_tool_observations_loss_on_plan_calls_final
+  benchmarks:
+  - tool_success
+  - task_completion
+  - invalid_action_rate
+- capability: long_context
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - late_pretraining
+  - anneal
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: construct_long_dependency_examples_if_inventory_is_thin
+  loss_shape: next_token_or_response_only_by_format
+  benchmarks:
+  - RULER_or_LongBench_style_evaluation
+- capability: non_indic_multilingual
+  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  training_stage:
+  - pretraining
+  samples: null
+  unique_tokens: null
+  license: PENDING
+  provenance_tier: PENDING
+  cleaning_status: not_data_gated_in_this_project
+  required_tokens: computed_after_inventory_inserted
+  repeat_factor: unknown
+  generation_requirement: additional_cleaning_required
+  loss_shape: next_token_loss
+  benchmarks:
+  - cross_lingual_validation
+  - multilingual_composite
+benchmark_contamination_rule: all_visible_evaluation_text_remains_private_and_is_excluded_from_training

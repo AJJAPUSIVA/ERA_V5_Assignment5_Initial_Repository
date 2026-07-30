@@ -1,7 +1,11 @@
-schema_version: v5-assignment5-mixture-1
+schema_version: v5-assignment5-mixture-2
 planning_reference_budget_tokens: 100000000000
 planning_reference_is_not_fixed_cohort_budget: true
-main_curriculum_percent:
+budget_accounting:
+  main_curriculum_percent_of_total: 92.0
+  exclusive_anneal_reserve_percent_of_total: 8.0
+  total_percent: 100.0
+main_curriculum_contribution_percent_of_total:
   general_language: 27.5
   indic: 23.5
   reasoning: 12.0
@@ -10,8 +14,16 @@ main_curriculum_percent:
   agentic: 5.5
   long_context: 5.5
   non_indic_multilingual: 4.5
-anneal_reserve_percent: 8.0
-anneal_contribution_percent:
+main_pretraining_preset_percent_within_main_92:
+  general_language: 29.89130435
+  indic: 25.54347826
+  reasoning: 13.04347826
+  code: 8.69565217
+  mathematics_science: 5.97826087
+  agentic: 5.97826087
+  long_context: 5.97826087
+  non_indic_multilingual: 4.89130435
+anneal_contribution_percent_of_total:
   general_language: 2.0
   indic_verified: 2.5
   reasoning: 1.5
@@ -19,6 +31,15 @@ anneal_contribution_percent:
   mathematics_science: 0.5
   agentic: 0.5
   long_context: 0.5
+  non_indic_multilingual: 0.0
+anneal_preset_percent_within_reserve_8:
+  general_language: 25.0
+  indic_verified: 31.25
+  reasoning: 18.75
+  code: 6.25
+  mathematics_science: 6.25
+  agentic: 6.25
+  long_context: 6.25
   non_indic_multilingual: 0.0
 final_effective_exposure_percent:
   general_language: 29.5
@@ -35,3 +56,4 @@ indic_final_split_percent_of_total_budget:
   translated: 4.0
   synthetic: 3.5
 synthetic_indic_cap_percent_of_total_budget: 3.5
+hypothesis_status: untrusted_until_1b_screening_and_3b_confirmation

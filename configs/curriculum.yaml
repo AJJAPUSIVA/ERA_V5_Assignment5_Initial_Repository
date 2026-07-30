@@ -1,78 +1,153 @@
-schema_version: v5-assignment5-curriculum-1
+schema_version: v5-assignment5-curriculum-2
 floor_window_model_tokens: 100000
-protected_floors_percent:
-  general_language: 20.0
-  indic_verified: 6.0
-  reasoning: 4.0
-  code: 3.0
-  agentic: 2.0
-  long_context: 2.0
+selector_policy:
+  method: OPUS_or_equivalent_value_selector
+  order_of_operations:
+  - insert_protected_capability_tokens
+  - lock_protected_tokens_outside_selector_control
+  - run_selector_only_on_remaining_window_capacity
+  - fill_remaining_capacity_from_selected_candidates
+  opus_bypass_protected_floors_percent:
+    indic_verified: 6.0
+    reasoning: 4.0
+    agentic: 2.0
+  stability_guardrail_floor_percent:
+    general_language: 15.0
+  synthetic_data_cannot_satisfy_verified_floor: true
+  floor_activates_only_after_lane_passes_data_gate: true
+training_lifecycle:
+  pretraining:
+    reasoning_material:
+    - problem_statements
+    - textbook_explanations
+    - proofs
+    - concise_worked_solutions
+    - short_visible_derivations
+    agentic_material:
+    - tool_documentation
+    - api_schemas
+    - basic_function_calls
+    - planning_text
+    - moderate_length_tool_examples
+    forbidden_interpretation: do_not_treat_all_long_reasoning_or_full_agentic_trajectories_as_flat_pretraining_data
+  annealing_or_reasoning_sft:
+    reasoning_material:
+    - short_medium_and_long_supervised_reasoning_traces
+    - self_checks
+    - corrections
+    agentic_material:
+    - highest_quality_multi_step_trajectories
+    - failure_and_recovery_sequences
+  reasoning_rl:
+    material: verifiable_problems_with_final_answer_or_environment_reward
+    training_signal: sequence_or_episode_reward_not_required_token_level_target
+agentic_loss_mask:
+  user_request: 0
+  system_or_tool_documentation_context: 0
+  tool_observation: 0
+  assistant_plan: 1
+  assistant_tool_call: 1
+  assistant_final_response: 1
+  rationale: tool observations are context and must not be learned as model-generated
+    facts
+reasoning_effort_bands:
+  low:
+    mapped_internal_band: R0_R1
+    trace_token_hypothesis: 0_to_128
+    example: direct classification or one short derivation
+  medium:
+    mapped_internal_band: R2_short
+    trace_token_hypothesis: 129_to_512
+    example: three-to-five-step constrained problem
+  high:
+    mapped_internal_band: R2_long_R3_short
+    trace_token_hypothesis: 513_to_2048
+    example: multi-step proof or program-debugging plan with verification
+  ultra:
+    mapped_internal_band: R3
+    trace_token_hypothesis: over_2048_or_branching_tool_assisted
+    example: multi-source research with tool calls, failures, recovery, and synthesis
+  note: token boundaries are proxy hypotheses and must be tested
+context_progression:
+  foundation: ordinary_and_moderate_context_only
+  capability_expansion: introduce_8k_to_16k_sequences_after_language_foundation
+  reasoning_intensification: increase_32k_plus_dependency_tracking_where_model_and_hardware_allow
+  anneal: highest_quality_long_trajectories_only
 stages:
 - name: foundation
-  start_percent: 0
-  end_percent: 35
-  mixture_percent:
-    general_language: 40
-    indic: 25
-    reasoning: 8
-    code: 8
-    mathematics_science: 5
-    agentic: 3
-    long_context: 4
-    non_indic_multilingual: 7
+  start_percent: 0.0
+  end_percent: 35.0
+  mixture_percent_within_stage:
+    general_language: 40.0
+    indic: 25.0
+    reasoning: 8.0
+    code: 8.0
+    mathematics_science: 5.0
+    agentic: 3.0
+    long_context: 4.0
+    non_indic_multilingual: 7.0
+  reasoning_policy: reasoning_support_only_not_long_chain_of_thought_training
+  agentic_policy: schemas_documentation_planning_and_basic_calls_not_scarce_full_trajectories
+  long_context_policy: 4_percent_is_moderate_context_preparation_not_true_long_context
   difficulty_percent:
-    D1_D2: 75
-    D3: 20
-    D4: 5
+    D1_D2: 75.0
+    D3: 20.0
+    D4: 5.0
   reasoning_length_percent:
-    R0_R1: 70
-    R2: 25
-    R3: 5
+    R0_R1: 70.0
+    R2: 25.0
+    R3: 5.0
 - name: capability_expansion
-  start_percent: 35
-  end_percent: 67
-  mixture_percent:
-    general_language: 28
-    indic: 27
-    reasoning: 12
-    code: 10
-    mathematics_science: 7
-    agentic: 6
-    long_context: 6
-    non_indic_multilingual: 4
+  start_percent: 35.0
+  end_percent: 67.0
+  mixture_percent_within_stage:
+    general_language: 28.0
+    indic: 27.0
+    reasoning: 12.0
+    code: 10.0
+    mathematics_science: 7.0
+    agentic: 6.0
+    long_context: 6.0
+    non_indic_multilingual: 4.0
+  reasoning_policy: increase_medium_reasoning_support_and_verifiable_problems
+  agentic_policy: introduce_multi_step_examples_but_protect_highest_quality_trajectories
+  long_context_policy: begin_longer_sequences_after_foundation
   difficulty_percent:
-    D1_D2: 55
-    D3: 35
-    D4: 10
+    D1_D2: 55.0
+    D3: 35.0
+    D4: 10.0
   reasoning_length_percent:
-    R0_R1: 50
-    R2: 35
-    R3: 15
+    R0_R1: 50.0
+    R2: 35.0
+    R3: 15.0
 - name: reasoning_intensification
-  start_percent: 67
-  end_percent: 92
-  mixture_percent:
-    general_language: 18
-    indic: 24
-    reasoning: 22
-    code: 8
-    mathematics_science: 7
-    agentic: 10
-    long_context: 8
-    non_indic_multilingual: 3
+  start_percent: 67.0
+  end_percent: 92.0
+  mixture_percent_within_stage:
+    general_language: 18.16
+    indic: 24.44
+    reasoning: 21.44
+    code: 8.0
+    mathematics_science: 6.04
+    agentic: 10.12
+    long_context: 8.72
+    non_indic_multilingual: 3.08
+  reasoning_policy: harder_support_data_and_reserved_material_preparation_for_later_sft_rl
+  agentic_policy: more_long_horizon_examples_while_keeping_tier_a_reserve_unspent
+  long_context_policy: true_long_context_dependency_tracking_introduced_here
   difficulty_percent:
-    D1_D2: 35
-    D3: 45
-    D4: 20
+    D1_D2: 35.0
+    D3: 45.0
+    D4: 20.0
   reasoning_length_percent:
-    R0_R1: 30
-    R2: 45
-    R3: 25
+    R0_R1: 30.0
+    R2: 45.0
+    R3: 25.0
 - name: anneal_cooldown
-  start_percent: 92
-  end_percent: 100
+  start_percent: 92.0
+  end_percent: 100.0
   exclusive_reserve: true
-  reserve_percent_of_total_budget:
+  reserve_contribution_percent_of_total:
     general_language: 2.0
     indic_verified: 2.5
     reasoning: 1.5
@@ -81,11 +156,52 @@ stages:
     agentic: 0.5
     long_context: 0.5
     non_indic_multilingual: 0.0
+  normalized_anneal_preset_percent:
+    general_language: 25.0
+    indic_verified: 31.25
+    reasoning: 18.75
+    code: 6.25
+    mathematics_science: 6.25
+    agentic: 6.25
+    long_context: 6.25
+    non_indic_multilingual: 0.0
+  eligibility:
+  - held_out_from_first_92_percent
+  - data_gated_and_license_cleared
+  - no_duplicate_exposure
+  - no_benchmark_contamination
+  - highest_quality_available_tier
+  - human_review_where_quality_is_material
   difficulty_percent:
-    D1_D2: 35
-    D3: 45
-    D4: 20
+    D1_D2: 35.0
+    D3: 45.0
+    D4: 20.0
   reasoning_length_percent:
-    R0_R1: 30
-    R2: 45
-    R3: 25
+    R0_R1: 30.0
+    R2: 45.0
+    R3: 25.0
+transition_blends:
+- boundary_percent: 35.0
+  from_stage: foundation
+  to_stage: capability_expansion
+  blend_width_percent_of_total_tokens: 1.0
+  schedule: linear_interpolation
+- boundary_percent: 67.0
+  from_stage: capability_expansion
+  to_stage: reasoning_intensification
+  blend_width_percent_of_total_tokens: 1.0
+  schedule: linear_interpolation
+- boundary_percent: 92.0
+  from_stage: reasoning_intensification
+  to_stage: anneal_cooldown
+  blend_width_percent_of_total_tokens: 0.75
+  schedule: linear_interpolation
+transition_monitoring:
+  metrics:
+  - training_loss
+  - validation_loss
+  - gradient_norm
+  - tokens_per_second
+  pause_if_gradient_norm_multiplier_over_trailing_baseline_exceeds: 4.0
+  do_not_change_architecture_or_parameter_freezing_at_same_boundary: true
+  rollback_to_last_stable_checkpoint_on_divergence: true
