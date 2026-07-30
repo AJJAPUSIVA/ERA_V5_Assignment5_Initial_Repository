@@ -115,16 +115,18 @@ The complete accounting is in [`configs/supply_accounting.yaml`](configs/supply_
 
 ## 6. Inventory, benchmarks and training shape
 
-The inventory is measured in both samples and tokens and records licence, provenance, cleaning state, required supply, repetition, generation need, training stage and loss shape.
+The canonical inventory schema is:
 
-| Capability | Dataset | Samples | Unique tokens | Licence/tier | Stage and learning signal | Benchmarks |
-|---|---|---:|---:|---|---|---|
-| General | Verified General pilot | 5,052 | 5,175,419 | Mixed licences; project verified | Pretraining next-token loss | MMLU-Pro, ARC-Challenge, WinoGrande |
-| Indic verified | Sangraha verified Hindi | 2,421 | 1,000,032 | CC-BY-4.0; verified | Pretraining; best subset reserved for anneal | MILU Hindi, IndicQA, IndicIFEval |
-| Indic authentic pending | COMI-LINGUA + PHINC | 24,759 | 443,916 | CC-BY-4.0; review pending | Pretraining; reserve eligibility after review | Hinglish validation and code-switch composite |
-| Indic synthetic | IndicCMix subset | 26,874 | 556,100 | MIT; synthetic | Limited pretraining; not eligible for verified floor | Indic composite and human-quality audit |
+`capability`, `dataset`, `published_samples`, `published_tokens_or_size`, `license`, `access_status`, `project_provenance_tier`, `data_gate_status`, `training_stage`, `loss_shape`, `benchmark`, and `source_citation`.
 
-Reasoning, Code, Mathematics, Agentic, Long-context, translated Indic, unverified Indic and non-Indic multilingual remain marked `PENDING_EXACT_SESSION_5_INVENTORY_ENTRY`. Their exact inventory rows must be inserted before cohort-scale acceptance.
+| Capability | Dataset | Published samples | Published tokens or size | License | Access status | Project provenance tier | Data gate status | Training stage / loss shape | Benchmark | Source citation |
+|---|---|---:|---:|---|---|---|---|---|---|---|
+| General | Verified General pilot | 5,052 | 5,175,419 | Mixed sources in Phase 2 manifest | Project pilot available | Project verified | Verified | Pretraining and high-quality anneal subset; next-token loss | MMLU-Pro, ARC-Challenge, WinoGrande | [Phase 2 report](evidence/V5_Phase2_General_5M_Evidence_Verification_20260729.md) |
+| Indic verified | Sangraha verified Hindi | 2,421 | 1,000,032 | CC-BY-4.0 | Project pilot available | Verified | Verified after hash repair | Pretraining and verified anneal subset; next-token loss | MILU Hindi, IndicQA Hindi, IndicIFEval | [Phase 3 report](evidence/V5_Phase3_Hindi_1M_Repaired_Verification_20260729.md) |
+| Indic authentic pending | COMI-LINGUA + PHINC | 24,759 | 443,916 | CC-BY-4.0 | Project pilot available | Authentic; human review pending | Automated gate passed; bilingual review pending | Pretraining; anneal after review; next-token loss | Hinglish validation loss, Indic code-switch composite | [Phase 4 report](evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md) |
+| Indic synthetic | IndicCMix subset | 26,874 | 556,100 | MIT | Project pilot available | Synthetic | Automated gate passed | Limited pretraining; excluded from verified floor; next-token loss | Indic composite, human-quality audit | [Phase 4 report](evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md) |
+
+Reasoning, Code, Mathematics, Agentic, Long-context, translated Indic, unverified Indic and non-Indic multilingual remain marked `PENDING_EXACT_SESSION_5_INVENTORY_ENTRY`. Their exact inventory rows and source citations must be inserted before cohort-scale acceptance.
 
 See [`configs/benchmark_mapping.yaml`](configs/benchmark_mapping.yaml).
 
@@ -301,7 +303,7 @@ Private:
 | Four-tier Indic split | Complete |
 | Explicit Agentic, Reasoning and Long-context lanes | Complete |
 | Exact course-inventory mapping for starved lanes | **Pending** |
-| Sample/token/licence/tier inventory schema | Complete |
+| Published inventory schema with access, provenance, gate and citations | Complete |
 | Supply and repetition accounting | Complete for project-backed lanes |
 | OPUS-bypass protected floors | Complete |
 | Separate anneal reserve and preset | Complete |
@@ -313,6 +315,21 @@ Private:
 | Public GitHub README | Published |
 | Incognito public-access test | **Pending user confirmation** |
 
-## 15. Decision statement
+## 15. Session 5 alignment summary
+
+The Session 5 alignment decisions are incorporated directly into this README and the linked configuration files:
+
+1. The 92% main-pretraining preset is separated from the exclusive 8% anneal reserve.
+2. Proxy experiments are described as planned, not executed.
+3. Reasoning-support pretraining is separated from later reasoning SFT and RL.
+4. Agentic training uses response-only loss masking and excludes tool observations from loss.
+5. Verified Indic, Reasoning and Agentic floors bypass OPUS.
+6. Mixture transitions use gradual blend bands with gradient-norm safeguards.
+7. Reasoning effort is mapped to low, medium, high and ultra bands.
+8. Stage mixtures are corrected so their weighted totals reproduce the headline 92% allocation exactly.
+9. The inventory uses the canonical published-data, access, provenance, gate, stage, loss, benchmark and citation schema documented in Section 6.
+10. GitHub publication status is recorded separately from the pending incognito-access test.
+
+## 16. Decision statement
 
 No percentage becomes trusted because it appears in this document. The mixture survives only if cheap proxies improve the targeted capability within predeclared regression limits and the result persists at the larger confirmation scale.
