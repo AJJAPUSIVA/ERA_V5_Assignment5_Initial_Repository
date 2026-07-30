@@ -252,7 +252,7 @@ The current 1,000 SEK proxy tests one narrow question using only data-gated Gene
 |---|---:|---:|---:|---|
 | M0 | 72% | 14% | 14% | Supply-aligned baseline |
 | M1 | 60% | 20% | 20% | Protected Indic treatment |
-| M2 | Same cumulative 60/20/20 | Curriculum schedule | Optional timing ablation |
+| M2 | 60% cumulative | 20% cumulative | 20% cumulative | Optional curriculum-timing ablation |
 
 M0 and M1 are mandatory. M2 runs only after both and their evaluations finish.
 
@@ -288,56 +288,6 @@ See [`configs/proxy_experiments.yaml`](configs/proxy_experiments.yaml).
 
 This order should be recalculated after the mapped public candidates pass project data gates and local token counts are measured.
 
-## 14. Reproducibility, privacy and submission status
-
-Public:
-
-- written specifications and configs;
-- text-free manifests and checksums;
-- aggregated metrics and cost summaries;
-- verification reports.
-
-Private:
-
-- raw/rejected data;
-- benchmark text;
-- human-review samples;
-- gated dataset contents;
-- credentials and paid checkpoints unless intentionally released.
-
-| Assignment requirement | Status |
-|---|---|
-| Capability shares sum to 100% | Complete |
-| Four-tier Indic split | Complete |
-| Explicit Agentic, Reasoning and Long-context lanes | Complete |
-| Exact course-inventory mapping for starved lanes | Complete — public candidates mapped; project data gates pending |
-| Published inventory schema with access, provenance, gate and citations | Complete |
-| Supply and repetition accounting | Complete for project-backed lanes |
-| OPUS-bypass protected floors | Complete |
-| Separate anneal reserve and preset | Complete |
-| Curriculum and transition safeguards | Complete |
-| Difficulty and effort bands with examples | Complete |
-| 1B-scale screening plan | Complete; not executed |
-| 3B-scale confirmation plan | Complete; not executed |
-| Data gate | General/Hindi verified; Hinglish review pending |
-| Public GitHub README | Published |
-| Incognito public-access test | **Pending user confirmation** |
-
-## 15. Session 5 alignment summary
-
-The Session 5 alignment decisions are incorporated directly into this README and the linked configuration files:
-
-1. The 92% main-pretraining preset is separated from the exclusive 8% anneal reserve.
-2. Proxy experiments are described as planned, not executed.
-3. Reasoning-support pretraining is separated from later reasoning SFT and RL.
-4. Agentic training uses response-only loss masking and excludes tool observations from loss.
-5. Verified Indic, Reasoning and Agentic floors bypass OPUS.
-6. Mixture transitions use gradual blend bands with gradient-norm safeguards.
-7. Reasoning effort is mapped to low, medium, high and ultra bands.
-8. Stage mixtures are corrected so their weighted totals reproduce the headline 92% allocation exactly.
-9. The inventory uses the canonical published-data, access, provenance, gate, stage, loss, benchmark and citation schema, with named public candidates for every previously starved lane.
-10. GitHub publication status is recorded separately from the pending incognito-access test.
-
-## 16. Decision statement
+## 14. Decision statement
 
 No percentage becomes trusted because it appears in this document. The mixture survives only if cheap proxies improve the targeted capability within predeclared regression limits and the result persists at the larger confirmation scale.
