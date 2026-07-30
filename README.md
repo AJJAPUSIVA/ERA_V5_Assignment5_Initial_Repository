@@ -119,14 +119,22 @@ The canonical inventory schema is:
 
 `capability`, `dataset`, `published_samples`, `published_tokens_or_size`, `license`, `access_status`, `project_provenance_tier`, `data_gate_status`, `training_stage`, `loss_shape`, `benchmark`, and `source_citation`.
 
-| Capability | Dataset | Published samples | Published tokens or size | License | Access status | Project provenance tier | Data gate status | Training stage / loss shape | Benchmark | Source citation |
-|---|---|---:|---:|---|---|---|---|---|---|---|
-| General | Verified General pilot | 5,052 | 5,175,419 | Mixed sources in Phase 2 manifest | Project pilot available | Project verified | Verified | Pretraining and high-quality anneal subset; next-token loss | MMLU-Pro, ARC-Challenge, WinoGrande | [Phase 2 report](evidence/V5_Phase2_General_5M_Evidence_Verification_20260729.md) |
-| Indic verified | Sangraha verified Hindi | 2,421 | 1,000,032 | CC-BY-4.0 | Project pilot available | Verified | Verified after hash repair | Pretraining and verified anneal subset; next-token loss | MILU Hindi, IndicQA Hindi, IndicIFEval | [Phase 3 report](evidence/V5_Phase3_Hindi_1M_Repaired_Verification_20260729.md) |
-| Indic authentic pending | COMI-LINGUA + PHINC | 24,759 | 443,916 | CC-BY-4.0 | Project pilot available | Authentic; human review pending | Automated gate passed; bilingual review pending | Pretraining; anneal after review; next-token loss | Hinglish validation loss, Indic code-switch composite | [Phase 4 report](evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md) |
-| Indic synthetic | IndicCMix subset | 26,874 | 556,100 | MIT | Project pilot available | Synthetic | Automated gate passed | Limited pretraining; excluded from verified floor; next-token loss | Indic composite, human-quality audit | [Phase 4 report](evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md) |
+| Capability | Dataset | Published samples | Published tokens or size | License | Access status | Project provenance tier | Data gate status | Training stage | Loss shape | Benchmark | Source citation |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| General | Verified General pilot | 5,052 | 5,175,419 | Mixed sources in Phase 2 manifest | Project pilot available | Project verified | Verified | Pretraining; high-quality anneal subset | Next-token loss | MMLU-Pro, ARC-Challenge, WinoGrande | [Phase 2 report](evidence/V5_Phase2_General_5M_Evidence_Verification_20260729.md) |
+| Indic verified | Sangraha verified Hindi | 2,421 | 1,000,032 | CC-BY-4.0 | Project pilot available | Verified | Verified after hash repair | Pretraining; verified anneal subset | Next-token loss | MILU Hindi, IndicQA Hindi, IndicIFEval | [Phase 3 report](evidence/V5_Phase3_Hindi_1M_Repaired_Verification_20260729.md) |
+| Indic authentic pending | COMI-LINGUA + PHINC | 24,759 | 443,916 | CC-BY-4.0 | Project pilot available | Authentic; human review pending | Automated gate passed; bilingual review pending | Pretraining; anneal after review | Next-token loss | Hinglish validation loss, Indic code-switch composite | [Phase 4 report](evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md) |
+| Indic synthetic | IndicCMix subset | 26,874 | 556,100 | MIT | Project pilot available | Synthetic | Automated gate passed | Limited pretraining; excluded from verified floor | Next-token loss | Indic composite, human-quality audit | [Phase 4 report](evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md) |
+| Indic unverified | ai4bharat/sangraha — unverified subset | Not published | 24,307.7M unverified tokens | CC-BY-4.0 | Public | Public unverified candidate | Public candidate; not yet project-gated | Pretraining | Next-token loss | Indic language modelling, Indic downstream composite | [Dataset card](https://huggingface.co/datasets/ai4bharat/sangraha) |
+| Indic translated | ai4bharat/BPCC | ~230M bitext pairs | 109 GB | CC0 / CC-BY-4.0 by component | Public; acknowledgement required | Public parallel-corpus candidate | Public candidate; not yet project-gated | Pretraining; anneal only if high quality | Next-token loss on parallel text | IN22-Gen, IN22-Conv, FLORES-200 | [Dataset card](https://huggingface.co/datasets/ai4bharat/BPCC) |
+| Reasoning | open-r1/OpenR1-Math-220k | 220,000 problems | 12.6 GB; 2–4 traces/problem | Apache-2.0 | Public | Public synthetic verified-reasoning candidate | Public candidate; not yet project-gated | Reasoning SFT; RL candidate | Supervised reasoning-trace loss | GSM8K, BBH, GPQA, MMLU-Pro | [Dataset card](https://huggingface.co/datasets/open-r1/OpenR1-Math-220k) |
+| Code | bigcode/the-stack-v2 | 3.28B unique files | 67.5 TB; ~900B train tokens | Source-specific SPDX; permissive-only filter required | Public gated; bulk agreement required | Public source-code candidate | Public candidate; not yet project-gated | Pretraining; filtered anneal subset | Next-token loss on code | HumanEval, MBPP | [Dataset card](https://huggingface.co/datasets/bigcode/the-stack-v2) |
+| Mathematics/science | AI-MO/NuminaMath-1.5 | 896,215 problems | Token count not published | Apache-2.0 | Public | Public math post-training candidate | Public candidate; not yet project-gated | Reasoning SFT; RL candidate | Supervised solution-trace loss | GSM8K, MATH-500, AIME-style evaluation | [Dataset card](https://huggingface.co/datasets/AI-MO/NuminaMath-1.5) |
+| Agentic | Salesforce/xlam-function-calling-60k | 60,000 | Token count not published | CC-BY-4.0 | Public; acknowledgement required | Public synthetic agentic candidate | Public candidate; not yet project-gated | Agentic SFT; high-quality anneal trajectories | Response-only masked loss | Tool success, task completion, invalid-action rate | [Dataset card](https://huggingface.co/datasets/Salesforce/xlam-function-calling-60k) |
+| Long-context | zai-org/LongCite-45k | 44,600 | 5.73 GB; up to 128K words | Apache-2.0 | Public | Public long-context SFT candidate | Public candidate; not yet project-gated | Late-pretraining support; long-context SFT; anneal subset | Response-and-citation loss | RULER, LongBench | [Dataset card](https://huggingface.co/datasets/zai-org/LongCite-45k) |
+| Non-Indic multilingual | HuggingFaceFW/fineweb-2 | 4,484,929,995 documents | 20.2 TB; 1,000+ languages | ODC-By-1.0; Common Crawl terms also apply | Public | Public multilingual-web candidate | Public candidate; not yet project-gated | Pretraining | Next-token loss | Cross-lingual validation, multilingual composite | [Dataset card](https://huggingface.co/datasets/HuggingFaceFW/fineweb-2) |
 
-Reasoning, Code, Mathematics, Agentic, Long-context, translated Indic, unverified Indic and non-Indic multilingual remain marked `PENDING_EXACT_SESSION_5_INVENTORY_ENTRY`. Their exact inventory rows and source citations must be inserted before cohort-scale acceptance.
+The eight previously starved lanes now map to named public datasets. These mappings complete the inventory-selection requirement, but they do **not** claim that the datasets have passed this project's licence review, deduplication, contamination, quality, privacy or sampling gates. Their `data_gate_status` therefore remains `public_candidate_not_yet_project_gated` until those checks are executed.
 
 See [`configs/benchmark_mapping.yaml`](configs/benchmark_mapping.yaml).
 
@@ -278,7 +286,7 @@ See [`configs/proxy_experiments.yaml`](configs/proxy_experiments.yaml).
 8. Non-Indic multilingual
 9. Additional Verified Indic and authentic Romanized Hinglish
 
-This order must be recalculated after the exact course inventory is inserted.
+This order should be recalculated after the mapped public candidates pass project data gates and local token counts are measured.
 
 ## 14. Reproducibility, privacy and submission status
 
@@ -302,7 +310,7 @@ Private:
 | Capability shares sum to 100% | Complete |
 | Four-tier Indic split | Complete |
 | Explicit Agentic, Reasoning and Long-context lanes | Complete |
-| Exact course-inventory mapping for starved lanes | **Pending** |
+| Exact course-inventory mapping for starved lanes | Complete — public candidates mapped; project data gates pending |
 | Published inventory schema with access, provenance, gate and citations | Complete |
 | Supply and repetition accounting | Complete for project-backed lanes |
 | OPUS-bypass protected floors | Complete |
@@ -327,7 +335,7 @@ The Session 5 alignment decisions are incorporated directly into this README and
 6. Mixture transitions use gradual blend bands with gradient-norm safeguards.
 7. Reasoning effort is mapped to low, medium, high and ultra bands.
 8. Stage mixtures are corrected so their weighted totals reproduce the headline 92% allocation exactly.
-9. The inventory uses the canonical published-data, access, provenance, gate, stage, loss, benchmark and citation schema documented in Section 6.
+9. The inventory uses the canonical published-data, access, provenance, gate, stage, loss, benchmark and citation schema, with named public candidates for every previously starved lane.
 10. GitHub publication status is recorded separately from the pending incognito-access test.
 
 ## 16. Decision statement

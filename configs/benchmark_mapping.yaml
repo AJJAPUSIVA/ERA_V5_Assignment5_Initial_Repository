@@ -1,4 +1,4 @@
-schema_version: v5-assignment5-benchmark-mapping-3
+schema_version: v5-assignment5-benchmark-mapping-4
 required_inventory_columns:
 - capability
 - dataset
@@ -12,7 +12,6 @@ required_inventory_columns:
 - loss_shape
 - benchmark
 - source_citation
-
 inventory_rows:
 - capability: general_language
   dataset: verified_general_5m_pilot
@@ -32,7 +31,6 @@ inventory_rows:
   - WinoGrande
   - validation_loss
   source_citation: evidence/V5_Phase2_General_5M_Evidence_Verification_20260729.md
-
 - capability: indic_verified
   dataset: ai4bharat_sangraha_verified_hindi_pilot
   published_samples: 2421
@@ -50,7 +48,6 @@ inventory_rows:
   - IndicQA Hindi
   - IndicIFEval
   source_citation: evidence/V5_Phase3_Hindi_1M_Repaired_Verification_20260729.md
-
 - capability: indic_verified_pending_review
   dataset: COMI-LINGUA_and_PHINC_authentic_hinglish_subset
   published_samples: 24759
@@ -67,7 +64,6 @@ inventory_rows:
   - Hinglish_validation_loss
   - Indic_code_switch_composite
   source_citation: evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md
-
 - capability: indic_synthetic
   dataset: IndicCMix_derived_hinglish_subset
   published_samples: 26874
@@ -84,141 +80,137 @@ inventory_rows:
   - Indic_composite
   - human_quality_audit
   source_citation: evidence/V5_Phase4_Hinglish_1M_Evidence_Verification_20260729.md
-
-starved_lane_templates:
 - capability: indic_unverified
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
+  dataset: ai4bharat/sangraha (unverified subset)
   published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  published_tokens_or_size: 24,307.7M unverified tokens across Indic languages
+  license: CC-BY-4.0
+  access_status: publicly_available_huggingface
+  project_provenance_tier: public_unverified_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
   - pretraining
   loss_shape: next_token_loss
   benchmark:
   - Indic_language_modelling
   - Indic_downstream_composite
-  source_citation: null
-
+  source_citation: https://huggingface.co/datasets/ai4bharat/sangraha
 - capability: indic_translated
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
-  published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  dataset: ai4bharat/BPCC
+  published_samples: 230000000
+  published_tokens_or_size: 109 GB; approximately 230M bitext pairs
+  license: CC0_and_CC-BY-4.0_by_component
+  access_status: public_gated_acknowledgement_required
+  project_provenance_tier: public_parallel_corpus_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
   - pretraining
   - anneal_only_if_high_quality
-  loss_shape: next_token_loss
+  loss_shape: next_token_loss_on_parallel_text
   benchmark:
-  - FLORES_or_IN22_style_translation
-  source_citation: null
-
+  - IN22-Gen
+  - IN22-Conv
+  - FLORES-200
+  source_citation: https://huggingface.co/datasets/ai4bharat/BPCC
 - capability: reasoning
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
-  published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  dataset: open-r1/OpenR1-Math-220k
+  published_samples: 220000
+  published_tokens_or_size: 12.6 GB; two-to-four reasoning traces per problem
+  license: Apache-2.0
+  access_status: publicly_available_huggingface
+  project_provenance_tier: public_synthetic_verified_reasoning_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
-  - pretraining_support
   - reasoning_sft
-  - reasoning_rl
-  loss_shape: stage_dependent_supervised_trace_or_reward
+  - reasoning_rl_candidate
+  loss_shape: supervised_reasoning_trace_loss
   benchmark:
   - GSM8K
   - BBH
   - GPQA
   - MMLU-Pro
-  source_citation: null
-
+  source_citation: https://huggingface.co/datasets/open-r1/OpenR1-Math-220k
 - capability: code
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
-  published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  dataset: bigcode/the-stack-v2
+  published_samples: 3280000000
+  published_tokens_or_size: 67.5 TB full corpus; approximately 900B train tokens
+  license: source_specific_spdx_licenses_permissive_only
+  access_status: public_gated_bulk_agreement_required
+  project_provenance_tier: public_source_code_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
   - pretraining
-  - anneal
-  loss_shape: loss_on_generated_code_patch_or_answer
+  - anneal_filtered_subset
+  loss_shape: next_token_loss_on_code
   benchmark:
-  - HumanEval_or_MBPP_style_execution
-  source_citation: null
-
+  - HumanEval
+  - MBPP
+  source_citation: https://huggingface.co/datasets/bigcode/the-stack-v2
 - capability: mathematics_science
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
-  published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  dataset: AI-MO/NuminaMath-1.5
+  published_samples: 896215
+  published_tokens_or_size: 896,215 competition-level math problems; token count not published
+  license: Apache-2.0
+  access_status: publicly_available_huggingface
+  project_provenance_tier: public_math_post_training_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
-  - pretraining
-  - reasoning_sft_rl
-  loss_shape: stage_dependent
+  - reasoning_sft
+  - reasoning_rl_candidate
+  loss_shape: supervised_solution_trace_loss
   benchmark:
   - GSM8K
-  - MATH_style_quantitative_evaluation
-  source_citation: null
-
+  - MATH-500
+  - AIME-style_evaluation
+  source_citation: https://huggingface.co/datasets/AI-MO/NuminaMath-1.5
 - capability: agentic
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
-  published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  dataset: Salesforce/xlam-function-calling-60k
+  published_samples: 60000
+  published_tokens_or_size: 60,000 function-calling examples; token count not published
+  license: CC-BY-4.0
+  access_status: public_gated_acknowledgement_required
+  project_provenance_tier: public_synthetic_agentic_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
-  - pretraining_support
-  - anneal_or_sft
+  - agentic_sft
+  - anneal_high_quality_trajectories
   loss_shape: mask_user_and_tool_observations_loss_on_plan_calls_final
   benchmark:
   - tool_success
   - task_completion
   - invalid_action_rate
-  source_citation: null
-
+  source_citation: https://huggingface.co/datasets/Salesforce/xlam-function-calling-60k
 - capability: long_context
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
-  published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  dataset: zai-org/LongCite-45k
+  published_samples: 44600
+  published_tokens_or_size: 5.73 GB; contexts up to 128,000 words
+  license: Apache-2.0
+  access_status: publicly_available_huggingface
+  project_provenance_tier: public_long_context_sft_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
-  - late_pretraining
-  - anneal
-  loss_shape: next_token_or_response_only_by_format
+  - late_pretraining_support
+  - long_context_sft
+  - anneal_high_quality_subset
+  loss_shape: response_and_citation_loss
   benchmark:
-  - RULER_or_LongBench_style_evaluation
-  source_citation: null
-
+  - RULER
+  - LongBench
+  source_citation: https://huggingface.co/datasets/zai-org/LongCite-45k
 - capability: non_indic_multilingual
-  dataset: PENDING_EXACT_SESSION_5_INVENTORY_ENTRY
-  published_samples: null
-  published_tokens_or_size: null
-  license: PENDING
-  access_status: not_available_in_project
-  project_provenance_tier: PENDING
-  data_gate_status: not_data_gated_in_this_project
+  dataset: HuggingFaceFW/fineweb-2
+  published_samples: 4484929995
+  published_tokens_or_size: 20.2 TB; more than 1,000 languages
+  license: ODC-By-1.0_and_CommonCrawl_terms
+  access_status: publicly_available_huggingface
+  project_provenance_tier: public_multilingual_web_candidate
+  data_gate_status: public_candidate_not_yet_project_gated
   training_stage:
   - pretraining
   loss_shape: next_token_loss
   benchmark:
   - cross_lingual_validation
   - multilingual_composite
-  source_citation: null
-
+  source_citation: https://huggingface.co/datasets/HuggingFaceFW/fineweb-2
+starved_lane_templates: []
 benchmark_contamination_rule: all_visible_evaluation_text_remains_private_and_is_excluded_from_training
