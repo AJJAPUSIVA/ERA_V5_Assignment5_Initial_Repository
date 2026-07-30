@@ -1,0 +1,63 @@
+schema_version: v5-assignment5-proxy-plan-1
+budget_ceiling_sek: 1000
+model_candidate: Qwen/Qwen2.5-1.5B
+method: continued_pretraining
+sequence_length: 1024
+precision: bf16
+gradient_checkpointing: true
+learning_rate: 1.0e-05
+weight_decay: 0.1
+warmup_ratio: 0.05
+scheduler: cosine
+seed: 42
+token_budget_rule:
+  maximum_tokens_per_run: 8000000
+  maximum_gpu_hours_per_run: 5
+  final_budget_selected_after_calibration: true
+  equal_tokens_for_all_conditions: true
+runs:
+  M0:
+    general: 72
+    hindi: 14
+    hinglish: 14
+  M1:
+    general: 60
+    hindi: 20
+    hinglish: 20
+  M2:
+    cumulative:
+      general: 60
+      hindi: 20
+      hinglish: 20
+    optional: true
+    stages:
+    - fraction: 0.6
+      general: 70
+      hindi: 15
+      hinglish: 15
+    - fraction: 0.3
+      general: 50
+      hindi: 25
+      hinglish: 25
+    - fraction: 0.1
+      general: 30
+      hindi: 35
+      hinglish: 35
+fixed_validation_lanes:
+- general
+- hindi
+- hinglish_native
+- hinglish_romanized
+acceptance:
+  hindi_loss_relative_improvement_min: 0.02
+  combined_hinglish_loss_relative_improvement_min: 0.02
+  general_loss_relative_regression_max: 0.01
+  any_lane_relative_regression_max: 0.02
+  weighted_overall_loss_must_not_worsen: true
+three_b_confirmation:
+  model_candidate: Qwen/Qwen2.5-3B
+  conditions:
+  - baseline
+  - best_1_5b_treatment
+  minimum_seeds_per_condition: 2
+  executed_in_current_budget: false

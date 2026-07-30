@@ -1,0 +1,91 @@
+schema_version: v5-assignment5-curriculum-1
+floor_window_model_tokens: 100000
+protected_floors_percent:
+  general_language: 20.0
+  indic_verified: 6.0
+  reasoning: 4.0
+  code: 3.0
+  agentic: 2.0
+  long_context: 2.0
+stages:
+- name: foundation
+  start_percent: 0
+  end_percent: 35
+  mixture_percent:
+    general_language: 40
+    indic: 25
+    reasoning: 8
+    code: 8
+    mathematics_science: 5
+    agentic: 3
+    long_context: 4
+    non_indic_multilingual: 7
+  difficulty_percent:
+    D1_D2: 75
+    D3: 20
+    D4: 5
+  reasoning_length_percent:
+    R0_R1: 70
+    R2: 25
+    R3: 5
+- name: capability_expansion
+  start_percent: 35
+  end_percent: 67
+  mixture_percent:
+    general_language: 28
+    indic: 27
+    reasoning: 12
+    code: 10
+    mathematics_science: 7
+    agentic: 6
+    long_context: 6
+    non_indic_multilingual: 4
+  difficulty_percent:
+    D1_D2: 55
+    D3: 35
+    D4: 10
+  reasoning_length_percent:
+    R0_R1: 50
+    R2: 35
+    R3: 15
+- name: reasoning_intensification
+  start_percent: 67
+  end_percent: 92
+  mixture_percent:
+    general_language: 18
+    indic: 24
+    reasoning: 22
+    code: 8
+    mathematics_science: 7
+    agentic: 10
+    long_context: 8
+    non_indic_multilingual: 3
+  difficulty_percent:
+    D1_D2: 35
+    D3: 45
+    D4: 20
+  reasoning_length_percent:
+    R0_R1: 30
+    R2: 45
+    R3: 25
+- name: anneal_cooldown
+  start_percent: 92
+  end_percent: 100
+  exclusive_reserve: true
+  reserve_percent_of_total_budget:
+    general_language: 2.0
+    indic_verified: 2.5
+    reasoning: 1.5
+    code: 0.5
+    mathematics_science: 0.5
+    agentic: 0.5
+    long_context: 0.5
+    non_indic_multilingual: 0.0
+  difficulty_percent:
+    D1_D2: 35
+    D3: 45
+    D4: 20
+  reasoning_length_percent:
+    R0_R1: 30
+    R2: 45
+    R3: 25

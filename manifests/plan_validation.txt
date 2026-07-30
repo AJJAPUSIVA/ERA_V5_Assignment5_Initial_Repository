@@ -1,0 +1,6 @@
+PLAN VALIDATION: PASS
+Main curriculum: 92.0%
+Anneal reserve: 8.0%
+Final exposure: 100.0%
+Final Indic allocation: 26.0%
+Supply rows: 11

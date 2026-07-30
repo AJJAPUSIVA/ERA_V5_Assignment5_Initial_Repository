@@ -1,0 +1,69 @@
+schema_version: v5-assignment5-benchmark-mapping-1
+mappings:
+  general_language:
+    current_data:
+    - verified_general_5m_pilot
+    benchmarks:
+    - MMLU-Pro
+    - ARC-Challenge
+    - WinoGrande
+    - validation_loss
+  indic_verified:
+    current_data:
+    - verified_hindi_1m
+    - authentic_hinglish_pending_review
+    benchmarks:
+    - MILU Hindi
+    - IndicQA Hindi
+    - IndicIFEval
+  indic_unverified:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+  indic_translated:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+    benchmarks:
+    - FLORES_or_IN22_style_translation
+  indic_synthetic:
+    current_data:
+    - IndicCMix_derived_hinglish
+    benchmarks:
+    - Indic_composite
+    - human_quality_audit
+  reasoning:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+    benchmarks:
+    - GSM8K
+    - BBH
+    - GPQA
+    - MMLU-Pro
+  code:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+    benchmarks:
+    - HumanEval_or_MBPP_style_execution
+  mathematics_science:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+    benchmarks:
+    - GSM8K
+    - MATH_style_quantitative_evaluation
+  agentic:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+    benchmarks:
+    - tool_success
+    - task_completion
+    - invalid_action_rate
+  long_context:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+    benchmarks:
+    - RULER_or_LongBench_style_evaluation
+  non_indic_multilingual:
+    current_data: []
+    inventory_status: pending_exact_course_inventory
+    benchmarks:
+    - cross_lingual_validation
+    - multilingual_composite
