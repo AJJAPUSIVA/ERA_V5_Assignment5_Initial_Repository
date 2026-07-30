@@ -2,7 +2,7 @@
 
 **Status:** Session-aligned written plan; low-budget proxy planned but not yet executed
 
-**Public repository:** published; incognito-access confirmation still must be recorded before submission
+**Public repository:** published,
 
 **Data gate:** General and Hindi verified; Hinglish automated gate passed with bilingual review pending
 
