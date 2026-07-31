@@ -240,39 +240,75 @@ During transitions, weights are linearly interpolated and loss, validation loss,
 
 These boundaries are testable hypotheses.
 
-## 12. Planned proxy experiments
+## 12. Executed T4 QLoRA proxy experiments
 
-The current 1,000 SEK proxy tests one narrow question using only data-gated General, Hindi and Hinglish lanes. It does not claim to validate the complete V5 mixture.
+The completed proxy tests one narrow mixture question using only the data-gated General, Hindi and Hinglish lanes. It does not validate the complete V5 mixture.
 
-### Approximately 1B-scale screening
+This was a resource-constrained, one-seed T4 QLoRA screening experiment using `Qwen/Qwen2.5-1.5B`. It is not equivalent to the originally planned full-parameter BF16 continued-pretraining experiment.
 
-**Candidate:** `Qwen/Qwen2.5-1.5B`, continued from the same base checkpoint.
+### Frozen experimental conditions
 
-| Run | General | Hindi | Hinglish | Purpose |
-|---|---:|---:|---:|---|
-| M0 | 72% | 14% | 14% | Supply-aligned baseline |
-| M1 | 60% | 20% | 20% | Protected Indic treatment |
-| M2 | 60% cumulative | 20% cumulative | 20% cumulative | Optional curriculum-timing ablation |
+- Model revision: `8faed761d45a263340a0528343f099c05c9a4323`
+- Repository/run basis: `80b2b453403a3c73ce463e730b7b1f322c3b91cf`
+- Sequence length: 1,024
+- Frozen model-token budget per condition: 7,995,392
+- Optimizer steps per condition: 976
+- Seed: 42
+- Method: 4-bit NF4 QLoRA, LoRA adapters only, FP16 compute
 
-M0 and M1 are mandatory. M2 runs only after both and their evaluations finish.
+| Run | General | Hindi | Hinglish | Runtime | Role |
+|---|---:|---:|---:|---:|---|
+| M0 | 72% | 14% | 14% | 3.10 hours | Preregistered supply-aligned baseline |
+| M1 | 60% | 20% | 20% | 3.24 hours | Protected Indic treatment |
+| M2 | — | — | — | Not run | Optional curriculum-timing ablation |
 
-Acceptance requires:
+### M0-versus-M1 validation results
 
-- Hindi validation loss improves by at least 2%;
-- combined Hinglish loss improves by at least 2%;
-- General loss worsens by no more than 1%;
-- no lane worsens by more than 2%;
-- weighted overall loss does not worsen.
+| Validation lane | M0 loss | M1 loss | Relative change |
+|---|---:|---:|---:|
+| General | 2.421526 | 2.422442 | +0.04% |
+| Hindi | 1.321622 | 1.305719 | -1.20% |
+| Hinglish native | 1.505295 | 1.474137 | -2.07% |
+| Hinglish romanized | 3.607619 | 3.521341 | -2.39% |
+| Combined Hinglish | 2.556457 | 2.497739 | -2.30% |
+| Equal-weight overall | 2.214016 | 2.180910 | -1.50% |
 
-One seed is directional evidence only.
+Negative relative change indicates lower validation loss and therefore improvement.
+
+### Predeclared acceptance results
+
+| Acceptance rule | Result |
+|---|---|
+| Hindi loss improves by at least 2% | **FAIL** — improved by 1.20% |
+| Combined Hinglish loss improves by at least 2% | **PASS** — improved by 2.30% |
+| General loss worsens by no more than 1% | **PASS** — regressed by 0.04% |
+| No individual lane worsens by more than 2% | **PASS** |
+| Equal-weight overall loss does not worsen | **PASS** — improved by 1.50% |
+
+### Conclusion
+
+**M1 does not pass all predeclared acceptance gates.**
+
+M1 is a promising but non-qualifying treatment: it improved Hindi, both Hinglish lanes, combined Hinglish, and the equal-weight overall loss while producing only a negligible General-language regression. However, the Hindi improvement was 1.20%, below the frozen 2% threshold. Because all five rules were required, M1 is not promoted as the accepted mixture based on this one-seed screening result.
+
+M0 remains the preregistered baseline. M2 was not started. A future decision would require either a preregistered M2 follow-up or multi-seed confirmation; the acceptance thresholds must not be changed after observing these results.
+
+Evidence:
+
+- [Human-readable M0-versus-M1 report](evidence/proxy_runs/comparisons/M0_vs_M1.md)
+- [Machine-readable comparison](evidence/proxy_runs/comparisons/M0_vs_M1.json)
+- [M0 report](evidence/proxy_runs/M0/M0_REPORT.md)
+- [M1 report](evidence/proxy_runs/M1/M1_REPORT.md)
+- [Executed T4 QLoRA configuration](configs/proxy_experiments_t4_qlora.yaml)
+- [Frozen comparison rules and results](configs/m0_m1_comparison.yaml)
 
 ### 3B confirmation
 
 **Candidate:** `Qwen/Qwen2.5-3B`.
 
-Compare the baseline with the best 1.5B treatment using at least two seeds per condition, identical token budgets, tokenizer, optimizer, schedule and evaluation files. Refute the treatment if the gain disappears, reverses or violates a regression guardrail.
+Compare the baseline with a preregistered treatment using at least two seeds per condition, identical token budgets, tokenizer, optimizer, schedule and evaluation files. Refute the treatment if the gain disappears, reverses or violates a regression guardrail.
 
-See [`configs/proxy_experiments.yaml`](configs/proxy_experiments.yaml).
+The original full-parameter plan remains documented in [`configs/proxy_experiments.yaml`](configs/proxy_experiments.yaml).
 
 ## 13. Starved-lane cleaning priority
 
@@ -290,4 +326,6 @@ This order should be recalculated after the mapped public candidates pass projec
 
 ## 14. Decision statement
 
-No percentage becomes trusted because it appears in this document. The mixture survives only if cheap proxies improve the targeted capability within predeclared regression limits and the result persists at the larger confirmation scale.
+The executed T4 QLoRA screen supports the direction of increasing Indic exposure because M1 improved Hindi and both Hinglish lanes without meaningful General-language damage. It does not establish M1 as the accepted mixture because the preregistered Hindi improvement gate was missed.
+
+The evidence is directional only: one seed, a resource-constrained adapter-training method, and a small frozen proxy budget. No percentage becomes trusted merely because it appears in this document. A treatment survives only when it meets every frozen guardrail and the result persists under multi-seed or larger-scale confirmation.
