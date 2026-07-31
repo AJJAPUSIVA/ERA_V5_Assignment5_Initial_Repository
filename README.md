@@ -1,6 +1,6 @@
 # ERA V5 Session 5 — Mixture and Curriculum Specification
 
-**Status:** Session-aligned written plan; low-budget proxy planned but not yet executed
+**Status:** T4 QLoRA calibration, M0, and M1 screening completed; M0-versus-M1 evaluation completed; M2 not started.
 
 **Public repository:** published,
 
