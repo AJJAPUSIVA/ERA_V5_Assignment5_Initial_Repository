@@ -1,0 +1,26 @@
+{
+  "general": {
+    "blocks": 64,
+    "loss": 2.4215264804661274,
+    "perplexity": 11.263039008348148,
+    "predicted_tokens": 65472
+  },
+  "hindi": {
+    "blocks": 64,
+    "loss": 1.3216221360489726,
+    "perplexity": 3.7494986437673465,
+    "predicted_tokens": 65472
+  },
+  "hinglish_native": {
+    "blocks": 19,
+    "loss": 1.5052946617728786,
+    "perplexity": 4.505481027739542,
+    "predicted_tokens": 19437
+  },
+  "hinglish_romanized": {
+    "blocks": 8,
+    "loss": 3.6076190769672394,
+    "perplexity": 36.87814418161823,
+    "predicted_tokens": 8184
+  }
+}

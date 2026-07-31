@@ -1,0 +1,125 @@
+{
+  "actual_mixture": {
+    "general": 72.00307377049181,
+    "hindi": 13.998463114754099,
+    "hinglish": 13.998463114754099
+  },
+  "condition": "M0",
+  "elapsed_seconds_this_session": 11168.454898786,
+  "interpretation": "resource_constrained_QLoRA_directional_evidence_only",
+  "m0_validation_metrics": {
+    "general": {
+      "blocks": 64,
+      "loss": 2.4215264804661274,
+      "perplexity": 11.263039008348148,
+      "predicted_tokens": 65472
+    },
+    "hindi": {
+      "blocks": 64,
+      "loss": 1.3216221360489726,
+      "perplexity": 3.7494986437673465,
+      "predicted_tokens": 65472
+    },
+    "hinglish_native": {
+      "blocks": 19,
+      "loss": 1.5052946617728786,
+      "perplexity": 4.505481027739542,
+      "predicted_tokens": 19437
+    },
+    "hinglish_romanized": {
+      "blocks": 8,
+      "loss": 3.6076190769672394,
+      "perplexity": 36.87814418161823,
+      "predicted_tokens": 8184
+    }
+  },
+  "method": {
+    "base_weight_storage": "4bit_NF4_with_double_quantization",
+    "compute_dtype": "float16",
+    "learning_rate": 0.0002,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "lora_r": 16,
+    "lora_target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "not_equivalent_to": "full_parameter_bf16_continued_pretraining",
+    "optimizer": "paged_adamw_8bit",
+    "proxy_kind": "resource_constrained_T4_QLoRA_directional_proxy",
+    "trainable_parameters": "LoRA_adapters_only"
+  },
+  "model_id": "Qwen/Qwen2.5-1.5B",
+  "model_revision": "8faed761d45a263340a0528343f099c05c9a4323",
+  "model_tokens": 7995392,
+  "optimizer_steps": 976,
+  "quantized_base_to_m0_comparison": {
+    "general": {
+      "m0_loss": 2.4215264804661274,
+      "quantized_base_loss": 2.4671279825270176,
+      "relative_loss_change": -0.018483638621042155
+    },
+    "hindi": {
+      "m0_loss": 1.3216221360489726,
+      "quantized_base_loss": 1.4780455622822046,
+      "relative_loss_change": -0.10583126137986128
+    },
+    "hinglish_native": {
+      "m0_loss": 1.5052946617728786,
+      "quantized_base_loss": 2.083555792507372,
+      "relative_loss_change": -0.27753570737772676
+    },
+    "hinglish_romanized": {
+      "m0_loss": 3.6076190769672394,
+      "quantized_base_loss": 4.6863120794296265,
+      "relative_loss_change": -0.23017950665241982
+    }
+  },
+  "quantized_base_validation_metrics": {
+    "general": {
+      "blocks": 64,
+      "loss": 2.4671279825270176,
+      "perplexity": 11.78854128970398,
+      "predicted_tokens": 65472
+    },
+    "hindi": {
+      "blocks": 64,
+      "loss": 1.4780455622822046,
+      "perplexity": 4.384368326870212,
+      "predicted_tokens": 65472
+    },
+    "hinglish_native": {
+      "blocks": 19,
+      "loss": 2.083555792507372,
+      "perplexity": 8.032981807811591,
+      "predicted_tokens": 19437
+    },
+    "hinglish_romanized": {
+      "blocks": 8,
+      "loss": 4.6863120794296265,
+      "perplexity": 108.45247726019166,
+      "predicted_tokens": 8184
+    }
+  },
+  "repository_commit": "80b2b453403a3c73ce463e730b7b1f322c3b91cf",
+  "seed": 42,
+  "status": "complete",
+  "target_mixture": {
+    "general": 72,
+    "hindi": 14,
+    "hinglish": 14
+  },
+  "trainer_metrics": {
+    "epoch": 1.0,
+    "total_flos": 6.374591923696435e+16,
+    "train_loss": 2.21000741544317,
+    "train_runtime": 11167.9007,
+    "train_samples_per_second": 0.699,
+    "train_steps_per_second": 0.087
+  }
+}

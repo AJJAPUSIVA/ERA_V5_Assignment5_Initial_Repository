@@ -1,0 +1,40 @@
+schema_version: v5-m0-m1-comparison-2
+status: complete
+baseline: M0
+treatment: M1
+
+relative_change_formula: (treatment_loss - baseline_loss) / baseline_loss
+negative_relative_change_means: improvement
+
+aggregation:
+  combined_hinglish: arithmetic_mean_of_native_and_romanized_losses
+  equal_weight_overall: arithmetic_mean_of_four_validation_lane_losses
+
+acceptance:
+  hindi_relative_improvement_min: 0.02
+  combined_hinglish_relative_improvement_min: 0.02
+  general_relative_regression_max: 0.01
+  any_lane_relative_regression_max: 0.02
+  equal_weight_overall_must_not_worsen: true
+  all_rules_required: true
+
+results:
+  general_relative_change: 0.000378154751974
+  hindi_relative_change: -0.012032963196054
+  hinglish_native_relative_change: -0.020698742714266
+  hinglish_romanized_relative_change: -0.023915559850179
+  combined_hinglish_relative_change: -0.022968495630046
+  equal_weight_overall_relative_change: -0.014952836862426
+  gates_passed: 4
+  gates_total: 5
+  all_acceptance_gates_pass: false
+  decision: M1_does_not_pass_all_predeclared_acceptance_gates
+
+interpretation:
+  M1: promising_but_non_qualifying_treatment
+  M0: preregistered_baseline
+  evidence_strength: one_seed_directional_only
+  M2_status: not_started
+
+machine_readable_result: evidence/proxy_runs/comparisons/M0_vs_M1.json
+human_readable_report: evidence/proxy_runs/comparisons/M0_vs_M1.md

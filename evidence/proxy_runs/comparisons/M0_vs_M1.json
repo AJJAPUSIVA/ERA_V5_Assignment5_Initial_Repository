@@ -1,0 +1,60 @@
+{
+  "acceptance_checks": {
+    "Combined Hinglish improves by at least 2%": true,
+    "Equal-weight overall loss does not worsen": true,
+    "General regression is no greater than 1%": true,
+    "Hindi loss improves by at least 2%": false,
+    "No individual lane regresses by more than 2%": true
+  },
+  "all_acceptance_gates_pass": false,
+  "baseline": "M0",
+  "combined_hinglish": {
+    "m0_loss": 2.556456869370059,
+    "m1_loss": 2.497738900937532,
+    "relative_change": -0.022968495630045792,
+    "relative_change_percent": -2.2968495630045793
+  },
+  "decision": "M1 DOES NOT PASS ALL PREDECLARED ACCEPTANCE GATES",
+  "equal_weight_overall": {
+    "m0_loss": 2.2140155888138047,
+    "m1_loss": 2.1809097749034043,
+    "relative_change": -0.014952836862425769,
+    "relative_change_percent": -1.495283686242577
+  },
+  "frozen_model_tokens": 7995392,
+  "interpretation": "One-seed directional T4 QLoRA proxy evidence only.",
+  "optimizer_steps_per_condition": 976,
+  "schema_version": "v5-m0-m1-comparison-result-1",
+  "status": "complete",
+  "treatment": "M1",
+  "validation": {
+    "general": {
+      "m0_loss": 2.4215264804661274,
+      "m1_loss": 2.422442192211747,
+      "m1_perplexity": 11.273357429087975,
+      "relative_change": 0.00037815475197426114,
+      "relative_change_percent": 0.03781547519742611
+    },
+    "hindi": {
+      "m0_loss": 1.3216221360489726,
+      "m1_loss": 1.305719105526805,
+      "m1_perplexity": 3.690341885017569,
+      "relative_change": -0.012032963196054094,
+      "relative_change_percent": -1.2032963196054094
+    },
+    "hinglish_native": {
+      "m0_loss": 1.5052946617728786,
+      "m1_loss": 1.4741369548596834,
+      "m1_perplexity": 4.367264999155825,
+      "relative_change": -0.02069874271426621,
+      "relative_change_percent": -2.069874271426621
+    },
+    "hinglish_romanized": {
+      "m0_loss": 3.6076190769672394,
+      "m1_loss": 3.521340847015381,
+      "m1_perplexity": 33.8297585975174,
+      "relative_change": -0.023915559850179274,
+      "relative_change_percent": -2.3915559850179275
+    }
+  }
+}

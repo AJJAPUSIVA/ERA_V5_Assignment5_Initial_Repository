@@ -1,0 +1,71 @@
+schema_version: v5-assignment5-t4-qlora-execution-2
+status: calibration_m0_m1_and_comparison_complete
+
+interpretation:
+  proxy_kind: resource_constrained_T4_QLoRA_directional_proxy
+  evidence_strength: one_seed_directional_only
+  not_equivalent_to: full_parameter_bf16_continued_pretraining
+  original_plan: configs/proxy_experiments.yaml
+
+repository:
+  calibration_and_run_basis_commit: 80b2b453403a3c73ce463e730b7b1f322c3b91cf
+
+model:
+  model_id: Qwen/Qwen2.5-1.5B
+  revision: 8faed761d45a263340a0528343f099c05c9a4323
+
+training:
+  sequence_length: 1024
+  base_weight_storage: 4bit_NF4_with_double_quantization
+  compute_dtype: float16
+  trainable_parameters: LoRA_adapters_only
+  optimizer: paged_adamw_8bit
+  learning_rate: 0.0002
+  seed: 42
+  frozen_model_tokens: 7995392
+  frozen_optimizer_steps: 976
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+conditions:
+  M0:
+    status: complete
+    target_mixture_percent:
+      general: 72
+      hindi: 14
+      hinglish: 14
+    runtime_hours: 3.1023
+    evidence: evidence/proxy_runs/M0/M0_RESULT_SUMMARY.json
+
+  M1:
+    status: complete
+    target_mixture_percent:
+      general: 60
+      hindi: 20
+      hinglish: 20
+    runtime_hours: 3.2376
+    evidence: evidence/proxy_runs/M1/M1_RESULT_SUMMARY.json
+
+comparison:
+  status: complete
+  decision: M1_does_not_pass_all_predeclared_acceptance_gates
+  gates_passed: 4
+  gates_total: 5
+  sole_failed_gate: hindi_relative_improvement_min_2_percent
+  report: evidence/proxy_runs/comparisons/M0_vs_M1.md
+
+M2:
+  status: not_started
+  submission_decision: not_run
+  future_use: optional_follow_up_after_review_or_multi_seed_confirmation
