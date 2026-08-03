@@ -1,0 +1,30 @@
+name: Experiment proposal
+description: Propose a preregistered follow-up experiment.
+title: "[Experiment]: "
+labels: ["experiment"]
+body:
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Falsifiable hypothesis
+    validations:
+      required: true
+  - type: textarea
+    id: controls
+    attributes:
+      label: Baseline, treatment and frozen controls
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance and rejection criteria
+      description: Define these before observing treatment results.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Public-safe evidence plan
+    validations:
+      required: true

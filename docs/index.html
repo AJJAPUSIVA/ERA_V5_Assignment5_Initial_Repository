@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ERA V5 M0 versus M1 Hindi and Hinglish data-mixture results.">
+<title>ERA V5 — M0 vs M1 Results</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #0b1020;
+  --panel: #121a2d;
+  --panel-2: #19233a;
+  --text: #eef3ff;
+  --muted: #aab6d3;
+  --border: #2b3859;
+  --good: #42d392;
+  --warn: #ffb454;
+  --bad: #ff6b7a;
+  --accent: #7aa2ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%, #1b2a54 0, transparent 35rem),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
+main { max-width: 1080px; margin: 0 auto; padding: 48px 20px 72px; }
+a { color: #a8c1ff; }
+.eyebrow {
+  color: var(--accent); font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; font-size: .78rem;
+}
+h1 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; margin: .4rem 0 1rem; }
+.lead { max-width: 760px; color: var(--muted); font-size: 1.15rem; }
+.grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin: 30px 0;
+}
+.card, section {
+  border: 1px solid var(--border); border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), transparent), var(--panel);
+  padding: 22px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.18);
+}
+.card .value { font-size: 2rem; font-weight: 800; }
+.card .label { color: var(--muted); }
+section { margin-top: 18px; }
+.decision { border-left: 6px solid var(--bad); }
+.decision.accepted { border-left-color: var(--good); }
+.decision h2 { margin-top: 0; }
+.metric { margin: 18px 0; }
+.metric-label { display: flex; justify-content: space-between; gap: 12px; }
+.track {
+  height: 12px; border-radius: 99px; overflow: hidden;
+  background: var(--panel-2); margin-top: 7px;
+}
+.bar { height: 100%; border-radius: inherit; }
+.improvement { background: linear-gradient(90deg, #23a96e, var(--good)); }
+.regression { background: linear-gradient(90deg, #d68b2e, var(--warn)); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+th { color: var(--muted); font-size: .82rem; text-transform: uppercase; letter-spacing: .05em; }
+.pill {
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  font-size: .76rem; font-weight: 800;
+}
+.pass { color: #07180f; background: var(--good); }
+.fail { color: #20070b; background: var(--bad); }
+.note { color: var(--muted); font-size: .92rem; }
+footer { color: var(--muted); margin-top: 34px; font-size: .9rem; }
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">ERA V5 · release v1.0.0</div>
+  <h1>Hindi/Hinglish mixture screening</h1>
+  <p class="lead">
+    A controlled comparison of M0 and M1 using the same
+    Qwen2.5-1.5B revision, frozen token budget, optimizer steps, seed and
+    validation files.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="value">4/5</div>
+      <div class="label">acceptance gates passed</div>
+    </div>
+    <div class="card">
+      <div class="value">-2.30%</div>
+      <div class="label">combined Hinglish loss</div>
+    </div>
+    <div class="card">
+      <div class="value">-1.50%</div>
+      <div class="label">equal-weight overall loss</div>
+    </div>
+  </div>
+
+  <section class="decision not-accepted">
+    <h2>Decision</h2>
+    <p><strong>M1 DOES NOT PASS ALL PREDECLARED ACCEPTANCE GATES</strong></p>
+    <p class="note">
+      M1 improved both Hinglish lanes and overall loss, while General
+      regression remained negligible. Hindi improved by 1.20%, below the
+      preregistered 2% minimum, so the treatment was not accepted.
+    </p>
+  </section>
+
+  <section>
+    <h2>Relative loss change</h2>
+    <p class="note">Negative values indicate improvement; positive values indicate regression.</p>
+    <div class="metric"><div class="metric-label"><span>General</span><strong>+0.04%</strong></div><div class="track"><div class="bar regression" style="width:2.00%" role="img" aria-label="General 0.04 percent regression"></div></div></div><div class="metric"><div class="metric-label"><span>Hindi</span><strong>-1.20%</strong></div><div class="track"><div class="bar improvement" style="width:50.31%" role="img" aria-label="Hindi 1.20 percent improvement"></div></div></div><div class="metric"><div class="metric-label"><span>Hinglish native</span><strong>-2.07%</strong></div><div class="track"><div class="bar improvement" style="width:86.55%" role="img" aria-label="Hinglish native 2.07 percent improvement"></div></div></div><div class="metric"><div class="metric-label"><span>Hinglish romanized</span><strong>-2.39%</strong></div><div class="track"><div class="bar improvement" style="width:100.00%" role="img" aria-label="Hinglish romanized 2.39 percent improvement"></div></div></div><div class="metric"><div class="metric-label"><span>Combined Hinglish</span><strong>-2.30%</strong></div><div class="track"><div class="bar improvement" style="width:96.04%" role="img" aria-label="Combined Hinglish 2.30 percent improvement"></div></div></div><div class="metric"><div class="metric-label"><span>Equal-weight overall</span><strong>-1.50%</strong></div><div class="track"><div class="bar improvement" style="width:62.52%" role="img" aria-label="Equal-weight overall 1.50 percent improvement"></div></div></div>
+  </section>
+
+  <section>
+    <h2>Frozen acceptance checks</h2>
+    <table>
+      <thead><tr><th>Check</th><th>Result</th></tr></thead>
+      <tbody><tr><td>Combined Hinglish improves by at least 2%</td><td><span class="pill pass">PASS</span></td></tr><tr><td>Equal-weight overall loss does not worsen</td><td><span class="pill pass">PASS</span></td></tr><tr><td>General regression is no greater than 1%</td><td><span class="pill pass">PASS</span></td></tr><tr><td>Hindi loss improves by at least 2%</td><td><span class="pill fail">FAIL</span></td></tr><tr><td>No individual lane regresses by more than 2%</td><td><span class="pill pass">PASS</span></td></tr></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Interpretation boundary</h2>
+    <p>
+      This is one-seed directional evidence from a resource-constrained T4
+      QLoRA experiment. It is not equivalent to full-parameter BF16 continued
+      pretraining and does not demonstrate transfer to a 3B model.
+    </p>
+    <p><a href="https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository/blob/master/evidence/proxy_runs/comparisons/M0_vs_M1.json">Inspect the machine-readable source evidence</a></p>
+  </section>
+
+  <footer>
+    Generated deterministically by <code>scripts/generate_dashboard.py</code>.
+    No external JavaScript or charting library is used.
+  </footer>
+</main>
+</body>
+</html>

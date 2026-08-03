@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Compile source
+        run: python -m compileall -q scripts tests
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate public evidence
+        run: python scripts/validate_evidence.py --repo-root .
+
+      - name: Recompute comparison
+        run: |
+          mkdir -p build/comparison
+          python scripts/compare_runs.py \
+            --baseline evidence/proxy_runs/M0/m0_validation_metrics.json \
+            --treatment evidence/proxy_runs/M1/m1_validation_metrics.json \
+            --baseline-name M0 \
+            --treatment-name M1 \
+            --output-dir build/comparison
+
+      - name: Verify deterministic dashboard
+        run: |
+          python scripts/generate_dashboard.py \
+            --comparison evidence/proxy_runs/comparisons/M0_vs_M1.json \
+            --output build/index.html
+          cmp build/index.html docs/index.html

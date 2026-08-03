@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite this repository when using its experiment design, analysis tooling, or public evidence."
+title: "ERA V5: Reproducible Hindi/Hinglish Data-Mixture Experiments"
+type: software
+version: 1.0.0
+date-released: 2026-08-03
+authors:
+  - family-names: "AJJAPUSIVA"
+repository-code: "https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository"
+url: "https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository"
+license: MIT
+keywords:
+  - QLoRA
+  - data mixture
+  - Hindi
+  - Hinglish
+  - multilingual language models
+  - reproducible machine learning

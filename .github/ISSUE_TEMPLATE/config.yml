@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security or private-data report
+    url: https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository/security
+    about: Do not disclose credentials, private paths or restricted data publicly.
