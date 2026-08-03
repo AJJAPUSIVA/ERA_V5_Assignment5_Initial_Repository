@@ -11,7 +11,7 @@ from typing import Any, Mapping, Sequence
 
 DEFAULT_REPOSITORY_URL = (
     "https://github.com/AJJAPUSIVA/"
-    "ERA_V5_Assignment5_Initial_Repository"
+    "indicmix-lab"
 )
 
 
@@ -118,8 +118,8 @@ def build_dashboard(
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ERA V5 M0 versus M1 Hindi and Hinglish data-mixture results.">
-<title>ERA V5 — M0 vs M1 Results</title>
+<meta name="description" content="IndicMix Lab M0 versus M1 Hindi and Hinglish data-mixture results.">
+<title>IndicMix Lab — M0 vs M1 Results</title>
 <style>
 :root {{
   color-scheme: light dark;
@@ -196,7 +196,7 @@ footer {{ color: var(--muted); margin-top: 34px; font-size: .9rem; }}
 </head>
 <body>
 <main>
-  <div class="eyebrow">ERA V5 · release v1.0.0</div>
+  <div class="eyebrow">IndicMix Lab · release v1.0.0</div>
   <h1>Hindi/Hinglish mixture screening</h1>
   <p class="lead">
     A controlled comparison of {baseline} and {treatment} using the same
@@ -265,7 +265,7 @@ footer {{ color: var(--muted); margin-top: 34px; font-size: .9rem; }}
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate the ERA V5 static results dashboard."
+        description="Generate the IndicMix Lab static results dashboard."
     )
     parser.add_argument("--comparison", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)

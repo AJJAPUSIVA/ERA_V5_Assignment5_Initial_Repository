@@ -1,13 +1,13 @@
 cff-version: 1.2.0
 message: "Please cite this repository when using its experiment design, analysis tooling, or public evidence."
-title: "ERA V5: Reproducible Hindi/Hinglish Data-Mixture Experiments"
+title: "IndicMix Lab: Reproducible Hindi/Hinglish Data-Mixture Research"
 type: software
 version: 1.0.0
 date-released: 2026-08-03
 authors:
   - family-names: "AJJAPUSIVA"
-repository-code: "https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository"
-url: "https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository"
+repository-code: "https://github.com/AJJAPUSIVA/indicmix-lab"
+url: "https://github.com/AJJAPUSIVA/indicmix-lab"
 license: MIT
 keywords:
   - QLoRA

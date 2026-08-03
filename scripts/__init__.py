@@ -1,1 +1,1 @@
-"""ERA V5 reproducible analysis utilities."""
+"""IndicMix Lab reproducible analysis utilities."""

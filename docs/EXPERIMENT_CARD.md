@@ -1,4 +1,4 @@
-# Experiment Card — ERA V5 M0/M1 T4 QLoRA Mixture Screen
+# Experiment Card — IndicMix Lab M0/M1 T4 QLoRA Mixture Screen
 
 ## 1. Summary
 

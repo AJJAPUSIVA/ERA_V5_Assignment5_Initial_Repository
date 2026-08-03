@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the public-safe ERA V5 evidence and open-source release files."""
+"""Validate the public-safe IndicMix Lab evidence and open-source release files."""
 
 from __future__ import annotations
 
@@ -36,10 +36,14 @@ REQUIRED_RELEASE_FILES = (
     "scripts/compare_runs.py",
     "scripts/generate_dashboard.py",
     "scripts/validate_evidence.py",
+    "scripts/check_branding.py",
+    "scripts/rebrand_repository.py",
     "tests/test_compare_runs.py",
     "tests/test_dashboard.py",
+    "tests/test_branding.py",
     "docs/EXPERIMENT_CARD.md",
     "docs/PORTFOLIO_CASE_STUDY.md",
+    "docs/REPOSITORY_RENAME_GUIDE.md",
     "docs/index.html",
 )
 
@@ -170,7 +174,7 @@ def validate(root: Path) -> list[str]:
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Validate ERA V5 public evidence and release structure."
+        description="Validate IndicMix Lab public evidence and release structure."
     )
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     return parser.parse_args(argv)

@@ -1,4 +1,4 @@
-# ERA V5 v1.0.0
+# IndicMix Lab v1.0.0
 
 ## Release summary
 
@@ -15,6 +15,8 @@ The release preserves the central scientific finding:
 - M1 was not promoted as the accepted mixture.
 
 ## Added in v1.0.0
+
+- IndicMix Lab public identity and repository rename guidance
 
 - Dependency-free comparison CLI
 - Evidence validator

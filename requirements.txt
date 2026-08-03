@@ -1,4 +1,4 @@
-# ERA V5 v1.0.0
+# IndicMix Lab v1.0.0
 # No third-party Python packages are required.
 # Supported Python versions: 3.10, 3.11, 3.12
 #

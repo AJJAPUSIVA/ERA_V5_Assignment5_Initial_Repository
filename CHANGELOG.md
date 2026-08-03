@@ -6,6 +6,8 @@ All notable public changes are documented here.
 
 ### Added
 
+- IndicMix Lab public identity and repository rename guidance
+
 - Reproducible standard-library M0-versus-M1 comparison CLI
 - Repository evidence validator
 - Deterministic visual dashboard generator

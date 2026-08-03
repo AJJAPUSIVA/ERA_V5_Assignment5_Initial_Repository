@@ -35,6 +35,9 @@ jobs:
       - name: Validate public evidence
         run: python scripts/validate_evidence.py --repo-root .
 
+      - name: Check active project branding
+        run: python scripts/check_branding.py --repo-root .
+
       - name: Recompute comparison
         run: |
           mkdir -p build/comparison
