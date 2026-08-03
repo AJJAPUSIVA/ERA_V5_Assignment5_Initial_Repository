@@ -1,6 +1,6 @@
-# ERA V5 — Reproducible Hindi/Hinglish Data-Mixture Experiments
+# IndicMix Lab — Reproducible Hindi/Hinglish Data-Mixture Experiments
 
-[![CI](https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository/actions/workflows/ci.yml/badge.svg)](https://github.com/AJJAPUSIVA/ERA_V5_Assignment5_Initial_Repository/actions/workflows/ci.yml)
+[![CI](https://github.com/AJJAPUSIVA/indicmix-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/AJJAPUSIVA/indicmix-lab/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python: standard library](https://img.shields.io/badge/Python-standard%20library-blue.svg)](scripts/compare_runs.py)
 [![Release](https://img.shields.io/badge/release-v1.0.0-brightgreen.svg)](docs/RELEASE_NOTES_v1.0.0.md)
@@ -175,5 +175,5 @@ paths are not included. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Use [`CITATION.cff`](CITATION.cff), or cite the repository as:
 
-> AJJAPUSIVA. *ERA V5: Reproducible Hindi/Hinglish Data-Mixture Experiments*,
+> AJJAPUSIVA. *IndicMix Lab: Reproducible Hindi/Hinglish Data-Mixture Experiments*,
 > version 1.0.0, 2026.
