@@ -1,1 +1,6 @@
-PyYAML>=6.0
+# ERA V5 v1.0.0
+# No third-party Python packages are required.
+# Supported Python versions: 3.10, 3.11, 3.12
+#
+# Install command (optional; performs no package installation):
+#   python -m pip install -r requirements.txt

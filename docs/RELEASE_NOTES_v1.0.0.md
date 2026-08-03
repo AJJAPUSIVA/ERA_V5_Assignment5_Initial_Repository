@@ -21,6 +21,7 @@ The release preserves the central scientific finding:
 - Deterministic static dashboard
 - Unit tests
 - Python 3.10–3.12 GitHub Actions CI
+- Comment-only `requirements.txt` documenting zero third-party dependencies
 - Job-facing README
 - Experiment card
 - Portfolio case study

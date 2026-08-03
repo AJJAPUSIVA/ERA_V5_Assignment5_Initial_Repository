@@ -11,6 +11,7 @@ All notable public changes are documented here.
 - Deterministic visual dashboard generator
 - Unit tests for metrics, acceptance gates, CLI behavior and dashboard output
 - GitHub Actions CI across Python 3.10, 3.11 and 3.12
+- Comment-only `requirements.txt` documenting zero third-party dependencies
 - Experiment card and portfolio case study
 - Static results dashboard suitable for GitHub Pages
 - MIT license, citation metadata and contribution guidance
